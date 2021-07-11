@@ -1,0 +1,30 @@
+Q. Describe your project?
+Q.Advantages of your project?
+
+Q.How you gathered requirement of your project?
+    stackoverflow,youtube
+Q. How and where you implement your project?
+    implemented in python so further i can use it in nodejs application too
+Q. Which software you used in your project?
+    selenium
+Q. What are the drawback of your system?
+    slow,
+Q.How you test your application?
+Q.From where you get reference, guide for your project work?
+    from webscraping course
+Q.In future what changes you will made in your application?
+Research 
+    Problems:
+        1.they constantly changed their code so i could'nt scrape the data just using request.i had to use selenium
+        2.The price of every product show differnt things so i had to find what worse can it show.
+        3.got error in selenium exception so find out importing extra something
+        4. how to sort list of dictionary by some key
+WHy:
+    1.we use virtual environment i.e, normal python is installed globally in your system but venv is seperate python which would 
+    only have just library so it doesnt conflict with global python
+    2. we use deafault json instead of panda,csv etc.
+Q changes form source cpode
+    made the code work
+    add image url json too
+    only worked on amazon.de but now on every amazon domain
+    made faster 
