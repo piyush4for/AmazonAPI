@@ -1,7 +1,8 @@
 # Amazon API Creater -
-- Get Link of items with details
-- Extract Info about Items
-- Generate Report Based on Info
+- Look for items links(scrape) inn amazon
+- Go through multiple pages (scrape the whole product on the list and get all links)
+- Loop through each link, and get all the data from each product  and store it in memory
+- Create report based on the data.
 
 ## Initial Setup Instructions
 
