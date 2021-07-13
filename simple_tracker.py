@@ -40,7 +40,7 @@ class GenerateReport:
             json.dump(report, f)
         print("Done...")
 
-    @staticmethod
+    
     def get_now():
         now = datetime.now()
         return now.strftime("%d/%m/%Y %H:%M:%S")
@@ -192,7 +192,7 @@ class AmazonAPI:
             return None
         return price
 
-    @staticmethod
+    
     def get_asin(product_link):
         return product_link[product_link.find('/dp/') + 4:product_link.find('/ref')]
 
@@ -218,3 +218,4 @@ if __name__ == '__main__':
     am = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
     data = am.run()
     GenerateReport(NAME, FILTERS, BASE_URL, CURRENCY, data)
+#aur haan ye code maine he banaya h poora @Piyush
