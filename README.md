@@ -41,20 +41,3 @@ pip install -r requirements.txt
 python simple_tracker.py
 ```
 Check output json file in reports directory
-
-
-. piyush/bin/activate
-pip install -r requirements.txt
-```
-WIndows
-```buildoutcfg
-source piyush/Scripts/activate
-pip install -r requirements.txt
-```
-## Running Script
-
-```buildoutcfg
-python simple_tracker.py
-```
-Check output json file in reports directory
-
