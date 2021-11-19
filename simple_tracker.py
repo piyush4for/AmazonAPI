@@ -1,5 +1,6 @@
 #importing file from amazon_config
 import time
+import schedule
 from selenium.webdriver.common.keys import Keys
 from amazon_config import (
     get_web_driver_options,
@@ -40,7 +41,7 @@ class GenerateReport:
             json.dump(report, f)
         print("Done...")
 
-    
+    @staticmethod
     def get_now():
         now = datetime.now()
         return now.strftime("%d/%m/%Y %H:%M:%S")
@@ -192,7 +193,7 @@ class AmazonAPI:
             return None
         return price
 
-    
+    @staticmethod
     def get_asin(product_link):
         return product_link[product_link.find('/dp/') + 4:product_link.find('/ref')]
 
@@ -212,10 +213,16 @@ class AmazonAPI:
         except:
             Exception()
         return float(price)
-
-
-if __name__ == '__main__':
+def run_my_script():
     am = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
     data = am.run()
     GenerateReport(NAME, FILTERS, BASE_URL, CURRENCY, data)
-#aur haan ye code maine he banaya h poora @Piyush
+
+
+if __name__ == '__main__':
+
+    run_my_script()
+    schedule.every().hour.do(run_my_script)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
