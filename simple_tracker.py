@@ -75,6 +75,7 @@ class AmazonAPI:
         print("Starting Script...")
         print(f"Looking for {self.search_term} products...")
         links = self.get_products_links()
+        # links = self.get_products_links()
         if not links:
             print("Stopped script.")
             return
@@ -174,12 +175,15 @@ class AmazonAPI:
     def get_price(self):
         price = None
         try:
-            price = self.driver.find_element_by_id('priceblock_ourprice').text
+            
+            #  price = self.driver.find_element_by_id('a-price-whole').text
+            # my update to 2022 may
+            price = self.driver.find_element_by_class_name('priceToPay').text
             price = self.convert_price(price)
         except NoSuchElementException:
             try:
                 availability = self.driver.find_element_by_id('availability').text
-                if 'Available' in availability:
+                if 'Available' in availability or 'In Stock' in availability:
                     price = self.driver.find_element_by_class_name('olp-padding-right').text
                     price = price[price.find(self.currency):]
                     price = self.convert_price(price)
@@ -222,7 +226,3 @@ def run_my_script():
 if __name__ == '__main__':
 
     run_my_script()
-    schedule.every().hour.do(run_my_script)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
