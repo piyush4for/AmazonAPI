@@ -88,7 +88,7 @@ class AmazonAPI:
 
     def get_products_links(self):
         self.driver.get(self.base_url)
-        element = self.driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
+        element = self.driver.find_element_by_id('twotabsearchtextbox')
         element.send_keys(self.search_term)
         element.send_keys(Keys.ENTER)
         time.sleep(1)  
@@ -96,16 +96,15 @@ class AmazonAPI:
         print(f"Our url: {self.driver.current_url}")
         time.sleep(1)  
        
-
-        result_list = self.driver.find_element_by_css_selector('.s-main-slot.s-result-list.s-search-results.sg-row').find_elements_by_css_selector('.s-result-item.s-asin.sg-col-0-of-12.sg-col-16-of-20.sg-col.sg-col-12-of-16')
+        result_list = self.driver.find_elements_by_class_name('s-result-list')
+        # result_list = self.driver.find_element_by_css_selector('.s-main-slot.s-result-list.s-search-results.sg-row').find_elements_by_css_selector('.s-result-item.s-asin.sg-col-0-of-12.sg-col-16-of-20.sg-col.sg-col-12-of-16')
         links = []
         try:
-            for link in result_list:
-                links.append(link.find_element_by_css_selector('.a-link-normal.a-text-normal').get_attribute('href'))
-                
-            # for i in links:
-            #    print(i) 
+            results = result_list[0].find_elements_by_xpath(
+                '//div/div/div/div/div/div[2]/div/div/div[1]/h2/a')
+            links = [link.get_attribute('href') for link in results]
             return links
+            
         except Exception as e:
             print("Didn't get any products...")
             print(e)
@@ -130,9 +129,13 @@ class AmazonAPI:
         self.driver.get(f'{product_short_url}?language=en_GB')
         time.sleep(2)
         title = self.get_title()
+        print(f"Title: {title}")
         seller = self.get_seller()
+        print(f"Title: {seller}")
         price = self.get_price()
+        print(f"Title: {price}")
         image = self.get_image()
+        print(f"Title: {image}")
         if title and seller and price and image:
             product_info = {
                 'asin': asin,
@@ -178,7 +181,7 @@ class AmazonAPI:
             
             #  price = self.driver.find_element_by_id('a-price-whole').text
             # my update to 2022 may
-            price = self.driver.find_element_by_class_name('priceToPay').text
+            price = self.driver.find_element_by_class_name('apexPriceToPay').text
             price = self.convert_price(price)
         except NoSuchElementException:
             try:
